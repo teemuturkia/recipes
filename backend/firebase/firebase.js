@@ -1,3 +1,5 @@
+'use strict';
+
 const admin = require("firebase-admin");
 /* Generate credentials-file in Firebase console */
 const serviceAccount = require("./credentials");
