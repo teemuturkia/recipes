@@ -20,11 +20,11 @@ ref.on("value", (snapshot) => {
     console.log("The read failed: " + errorObject.code);
 });
 
-getAll = () => {
+const getAll = () => {
     return recipes;
 };
 
-create = (recipe) => {
+const create = (recipe) => {
     const newRecipeRef = ref.push();
     newRecipeRef.set(recipe);
 };
