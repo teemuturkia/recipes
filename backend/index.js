@@ -2,7 +2,7 @@
 
 const express = require('express'),
     bodyParser = require('body-parser'),
-    recipeService = require('./recipe-service'),
+    firebase = require('./firebase/firebase'),
     app = express(),
     api = express(),
     port = 3000;
@@ -10,9 +10,9 @@ const express = require('express'),
 api.use(bodyParser.json({strict: false}));
 app.use('/api', api);
 
-api.get('/recipes', (req, res) => res.json(recipeService.getAll()));
+api.get('/recipes', (req, res) => res.json(firebase.getAll()));
 api.post('/recipes', (req, res) => {
-    recipeService.create(req.body);
+    firebase.create(req.body);
     res.send('OK');
 });
 
