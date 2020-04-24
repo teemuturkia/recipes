@@ -11,21 +11,21 @@ const db = admin.database();
 const ref = db.ref("recipes");
 let recipes = [];
 
-ref.on("value", function(snapshot) {
+ref.on("value", (snapshot) => {
     const val = snapshot.val();
     recipes = val ? val : [];
-}, function (errorObject) {
+}, (errorObject) => {
     console.log("The read failed: " + errorObject.code);
 });
 
-function getAll() {
+getAll = () => {
     return recipes;
-}
+};
 
-function create(recipe) {
+create = (recipe) => {
     const newRecipeRef = ref.push();
     newRecipeRef.set(recipe);
-}
+};
 
 module.exports = {
     getAll,
