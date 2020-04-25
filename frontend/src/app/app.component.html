@@ -1,18 +1,20 @@
 <div fxLayout="column" class="layout-wrapper">
 
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="mat-elevation-z8">
     <mat-toolbar-row>
       <mat-icon>local_dining</mat-icon>
       <span>{{ title }}</span>
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <header color="primary">
-    <h1>Reseptit arkeen ja juhlaan</h1>
-    <p>Kotikokki tarjoaa Suomen laajimman valikoiman kotikeittiöissä arjessa ja juhlassa hyväksi havaittuja reseptejä. Katso reseptit, jaa omasi ja nauti onnistumisista!</p>
+  <header>
+    <h1>Parhaat reseptit arkeen ja juhlaan</h1>
+    <p>Täältä löydät parhaan valikoiman arjessa ja juhlassa hyväksi havaittuja reseptejä.</p>
   </header>
 
-  <div *ngFor="let recipe of recipes | async">
-    {{ recipe.title }}
-  </div>
+  <app-recipe-list></app-recipe-list>
 </div>
+
+<footer>
+  Jep jepu
+</footer>

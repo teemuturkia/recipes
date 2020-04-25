@@ -1,20 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { RecipeService } from './services/recipe.service';
-import { Observable } from 'rxjs';
-import { Recipe } from './models/recipe';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Reseptipankki';
-  recipes: Observable<Recipe[]>;
 
-  constructor(private recipeService: RecipeService) { }
-
-  ngOnInit(): void {
-    this.recipes = this.recipeService.getAll();
-  }
+  constructor() { }
 }

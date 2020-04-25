@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Lisää uusi resepti</h1>
+<div mat-dialog-content>
+  <form [formGroup]="recipeForm">
+    <mat-form-field color="accent">
+      <mat-label>Nimi</mat-label>
+      <input formControlName="title" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field color="accent">
+      <mat-label>Ryhmä</mat-label>
+      <input formControlName="group" matInput [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+        <mat-option *ngFor="let g of filteredGroups | async" [value]="g">
+          {{g}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <br>
+    <mat-form-field color="accent">
+      <mat-label>Ainekset</mat-label>
+      <textarea matInput formControlName="ingredients"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Valmistusohjeet</mat-label>
+      <textarea matInput formControlName="procedure"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]>Peruuta</button>
+  <button mat-button color="primary" (click)="save(recipeForm.value)">Ok</button>
+</div>

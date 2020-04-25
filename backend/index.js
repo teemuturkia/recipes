@@ -13,7 +13,7 @@ app.use('/api', api);
 api.get('/recipes', (req, res) => res.json(firebase.getAll()));
 api.post('/recipes', (req, res) => {
     firebase.create(req.body);
-    res.send('OK');
+    res.json({result: 'OK'});
 });
 
 app.listen(port, () => console.log(`Recipes app listening at port: ${port}`));

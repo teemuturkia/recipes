@@ -1,1 +1,11 @@
-<p>recipe-list works!</p>
+<button mat-fab color="primary" class="add" (click)="addNew()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-nav-list>
+  <div mat-subheader>Pääruoat</div>
+  <mat-list-item *ngFor="let recipe of recipes | async">
+    <mat-icon mat-list-icon color="accent">double_arrow</mat-icon>
+    <div mat-line>{{recipe.title}}</div>
+  </mat-list-item>
+</mat-nav-list>
