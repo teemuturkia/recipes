@@ -13,12 +13,14 @@ import { EditRecipeComponent } from '../edit-recipe/edit-recipe.component';
 export class RecipeListComponent implements OnInit {
 
   recipes: Observable<Recipe[]>;
+  groups: Observable<string[]>;
 
   constructor(private recipeService: RecipeService,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.recipes = this.recipeService.getAll();
+    this.groups = this.recipeService.getGroups();
   }
 
   addNew(): void {

@@ -27,12 +27,14 @@ export class EditRecipeComponent implements OnInit {
       procedure: '',
       group: ''
     });
-    this.groups = this.recipeService.getGroups();
-    this.filteredGroups = this.recipeForm.get('group').valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this.filterGroups(value))
-      );
+    this.recipeService.getGroups().subscribe(groups => {
+      this.groups = groups;
+      this.filteredGroups = this.recipeForm.get('group').valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this.filterGroups(value))
+        );
+    });
   }
 
   save(recipe): void {

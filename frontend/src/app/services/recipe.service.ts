@@ -43,10 +43,17 @@ export class RecipeService {
     );
   }
 
-  getGroups(): string[] {
-    const groups = this.recipes.value.map(r => r.group);
-    // Create unique array
-    return Array.from(new Set(groups)).sort();
+  getGroups(): Observable<string[]> {
+    return this.getAll().pipe(
+      map((recipes) => {
+        if (!recipes) {
+          return [];
+        }
+        const groups = recipes.map(r => r.group);
+        // Create unique array
+        return Array.from(new Set(groups)).sort();
+      })
+    );
   }
 
   private updateDataModel(): void {

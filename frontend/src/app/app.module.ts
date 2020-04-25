@@ -19,12 +19,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GroupFilterPipe } from './pipes/group-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeListComponent,
-    EditRecipeComponent
+    EditRecipeComponent,
+    GroupFilterPipe
   ],
   imports: [
     BrowserModule,
