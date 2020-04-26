@@ -18,10 +18,14 @@
   </mat-button-toggle>
 </mat-button-toggle-group>
 
+<mat-form-field appearance="standard" class="filter">
+  <input matInput placeholder="Suodata..." [formControl]="filter">
+</mat-form-field>
+
 <mat-nav-list *ngIf="listMode.value === 'grouped'">
   <div *ngFor="let group of groups | async">
     <div mat-subheader>{{ group }}</div>
-    <mat-list-item *ngFor="let recipe of recipes | async | groupFilter: group" (click)="openRecipe(recipe)">
+    <mat-list-item *ngFor="let recipe of filteredRecipes | async | groupFilter: group" (click)="openRecipe(recipe)">
       <mat-icon mat-list-icon color="accent">double_arrow</mat-icon>
       <div mat-line>{{recipe.title}}</div>
     </mat-list-item>
@@ -30,7 +34,7 @@
 
 <mat-nav-list *ngIf="listMode.value === 'alpha'">
   <div mat-subheader>Reseptit</div>
-  <mat-list-item *ngFor="let recipe of recipes | async | alphaSort" (click)="openRecipe(recipe)">
+  <mat-list-item *ngFor="let recipe of filteredRecipes | async | alphaSort" (click)="openRecipe(recipe)">
     <mat-icon mat-list-icon color="accent">double_arrow</mat-icon>
     <div mat-line>{{recipe.title}}</div>
   </mat-list-item>

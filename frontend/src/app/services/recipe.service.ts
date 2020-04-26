@@ -63,11 +63,13 @@ export class RecipeService {
         if (!recipes) {
           return [];
         }
-        const groups = recipes.map(r => r.group);
-        // Create unique array
-        return Array.from(new Set(groups)).sort();
+        return this.getUniqueGroups(recipes.map(r => r.group));
       })
     );
+  }
+
+  getUniqueGroups(groups: string[]): string[] {
+    return Array.from(new Set(groups)).sort();
   }
 
   private updateDataModel(): void {

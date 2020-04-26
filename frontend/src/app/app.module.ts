@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -38,6 +38,7 @@ import { AlphaSortPipe } from './pipes/alpha-sort.pipe';
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatAutocompleteModule,

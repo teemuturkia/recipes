@@ -5,6 +5,8 @@ import { RecipeService } from '../services/recipe.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditRecipeComponent } from '../edit-recipe/edit-recipe.component';
 import { RecipeViewComponent } from '../recipe-view/recipe-view.component';
+import { map, tap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,14 +16,18 @@ import { RecipeViewComponent } from '../recipe-view/recipe-view.component';
 export class RecipeListComponent implements OnInit {
 
   recipes: Observable<Recipe[]>;
+  filteredRecipes: Observable<Recipe[]>;
   groups: Observable<string[]>;
+  filter = new FormControl('');
 
   constructor(private recipeService: RecipeService,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.recipes = this.recipeService.getAll();
-    this.groups = this.recipeService.getGroups();
+
+    this.filter.valueChanges.subscribe(() => this.filterRecipes());
+    this.recipes.pipe(tap(() => this.filterRecipes())).subscribe();
   }
 
   addNew(): void {
@@ -42,6 +48,24 @@ export class RecipeListComponent implements OnInit {
         this.edit(recipe);
       }
     });
+  }
+
+  private filterRecipes(): void {
+    const filterVal = this.filter.value;
+    this.filteredRecipes = this.recipes.pipe(
+      map(list => {
+        if (!Array.isArray(list)) {
+          return [];
+        }
+        return list.filter(r => r.title.toLowerCase().includes(filterVal.toLowerCase()));
+      })
+    );
+
+    this.groups = this.filteredRecipes.pipe(
+      map(list => {
+        return this.recipeService.getUniqueGroups(list.map(r => r.group));
+      })
+    );
   }
 
 }
