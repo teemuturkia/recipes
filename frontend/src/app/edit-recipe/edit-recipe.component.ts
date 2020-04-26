@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecipeService } from '../services/recipe.service';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -22,10 +22,10 @@ export class EditRecipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipeForm = this.fb.group({
-      title: '',
+      title: ['', Validators.required],
       ingredients: '',
-      procedure: '',
-      group: ''
+      procedure: ['', Validators.required],
+      group: ['', Validators.required]
     });
     this.recipeService.getGroups().subscribe(groups => {
       this.groups = groups;

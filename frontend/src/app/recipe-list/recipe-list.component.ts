@@ -4,6 +4,7 @@ import { Recipe } from '../models/recipe';
 import { RecipeService } from '../services/recipe.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditRecipeComponent } from '../edit-recipe/edit-recipe.component';
+import { RecipeViewComponent } from '../recipe-view/recipe-view.component';
 
 @Component({
   selector: 'app-recipe-list',
@@ -25,6 +26,12 @@ export class RecipeListComponent implements OnInit {
 
   addNew(): void {
     this.dialog.open(EditRecipeComponent);
+  }
+
+  openRecipe(recipe: Recipe): void {
+    this.dialog.open(RecipeViewComponent, {
+      data: {recipe}
+    });
   }
 
 }

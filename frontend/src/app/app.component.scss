@@ -5,20 +5,3 @@
 .mat-toolbar span {
   margin-left: 10px;
 }
-
-header{
-  text-align: center;
-  color: white;
-  text-shadow: 3px 3px 3px black;
-  background: url("src/assets/images/header.jpg") bottom right no-repeat;
-  background-size: cover;
-  padding: 100px;
-
-  h1 {
-    font-size: 3em;
-    margin-bottom: 50px;
-  }
-  p {
-    font-size: 1.5em;
-  }
-}

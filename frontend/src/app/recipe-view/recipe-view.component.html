@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{ recipe.title }}</h1>
+<div mat-dialog-content>
+  <p>{{ recipe.ingredients }}</p>
+  <p>{{ recipe.procedure }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close] color="primary">Ok</button>
+  <button mat-button>Muokkaa</button>
+  <button mat-button>Poista</button>
+</div>

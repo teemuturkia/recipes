@@ -1,3 +1,8 @@
+<header>
+  <h1>Parhaat reseptit arkeen ja juhlaan</h1>
+  <p>Täältä löydät parhaan valikoiman arjessa ja juhlassa hyväksi havaittuja reseptejä.</p>
+</header>
+
 <button mat-fab color="primary" class="add" (click)="addNew()">
   <mat-icon>add</mat-icon>
 </button>
@@ -5,7 +10,7 @@
 <mat-nav-list>
   <div *ngFor="let group of groups | async">
     <div mat-subheader>{{ group }}</div>
-    <mat-list-item *ngFor="let recipe of recipes | async | groupFilter: group">
+    <mat-list-item *ngFor="let recipe of recipes | async | groupFilter: group" (click)="openRecipe(recipe)">
       <mat-icon mat-list-icon color="accent">double_arrow</mat-icon>
       <div mat-line>{{recipe.title}}</div>
     </mat-list-item>

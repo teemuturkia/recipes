@@ -20,15 +20,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GroupFilterPipe } from './pipes/group-filter.pipe';
+import { AppRouteModule } from './app-route.module';
+import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeListComponent,
     EditRecipeComponent,
-    GroupFilterPipe
+    GroupFilterPipe,
+    RecipeViewComponent
   ],
   imports: [
+    AppRouteModule,
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
