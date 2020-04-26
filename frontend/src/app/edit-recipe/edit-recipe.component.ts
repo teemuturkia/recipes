@@ -22,7 +22,7 @@ export class EditRecipeComponent implements OnInit {
               private dialogRef: MatDialogRef<EditRecipeComponent>,
               private fb: FormBuilder,
               private recipeService: RecipeService) {
-    this.recipe = data.recipe || new Recipe();
+    this.recipe = (data && data.recipe) || new Recipe();
   }
 
   ngOnInit(): void {

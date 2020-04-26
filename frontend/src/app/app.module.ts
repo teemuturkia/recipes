@@ -22,6 +22,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GroupFilterPipe } from './pipes/group-filter.pipe';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { AlphaSortPipe } from './pipes/alpha-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     RecipeListComponent,
     EditRecipeComponent,
     GroupFilterPipe,
-    RecipeViewComponent
+    RecipeViewComponent,
+    AlphaSortPipe
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,

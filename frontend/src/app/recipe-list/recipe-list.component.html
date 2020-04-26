@@ -7,7 +7,18 @@
   <mat-icon>add</mat-icon>
 </button>
 
-<mat-nav-list>
+<br>
+
+<mat-button-toggle-group #listMode="matButtonToggleGroup" class="toggle-group" value="grouped">
+  <mat-button-toggle value="grouped">
+    <mat-icon>view_stream</mat-icon>
+  </mat-button-toggle>
+  <mat-button-toggle value="alpha">
+    <mat-icon>sort_by_alpha</mat-icon>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-nav-list *ngIf="listMode.value === 'grouped'">
   <div *ngFor="let group of groups | async">
     <div mat-subheader>{{ group }}</div>
     <mat-list-item *ngFor="let recipe of recipes | async | groupFilter: group" (click)="openRecipe(recipe)">
@@ -15,4 +26,12 @@
       <div mat-line>{{recipe.title}}</div>
     </mat-list-item>
   </div>
+</mat-nav-list>
+
+<mat-nav-list *ngIf="listMode.value === 'alpha'">
+  <div mat-subheader>Reseptit</div>
+  <mat-list-item *ngFor="let recipe of recipes | async | alphaSort" (click)="openRecipe(recipe)">
+    <mat-icon mat-list-icon color="accent">double_arrow</mat-icon>
+    <div mat-line>{{recipe.title}}</div>
+  </mat-list-item>
 </mat-nav-list>
