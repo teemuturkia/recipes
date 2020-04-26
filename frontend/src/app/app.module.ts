@@ -20,7 +20,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GroupFilterPipe } from './pipes/group-filter.pipe';
-import { AppRouteModule } from './app-route.module';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 
 @NgModule({
@@ -32,7 +31,6 @@ import { RecipeViewComponent } from './recipe-view/recipe-view.component';
     RecipeViewComponent
   ],
   imports: [
-    AppRouteModule,
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
