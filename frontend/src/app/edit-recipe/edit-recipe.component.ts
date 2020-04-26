@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecipeService } from '../services/recipe.service';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Recipe } from '../models/recipe';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -12,20 +13,24 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class EditRecipeComponent implements OnInit {
 
+  recipe: Recipe;
   recipeForm: FormGroup;
   groups: string[];
   filteredGroups: Observable<string[]>;
 
-  constructor(private dialogRef: MatDialogRef<EditRecipeComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              private dialogRef: MatDialogRef<EditRecipeComponent>,
               private fb: FormBuilder,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService) {
+    this.recipe = data.recipe || new Recipe();
+  }
 
   ngOnInit(): void {
     this.recipeForm = this.fb.group({
-      title: ['', Validators.required],
-      ingredients: '',
-      procedure: ['', Validators.required],
-      group: ['', Validators.required]
+      title: [this.recipe.title, Validators.required],
+      ingredients: this.recipe.ingredients,
+      procedure: [this.recipe.procedure, Validators.required],
+      group: [this.recipe.group, Validators.required]
     });
     this.recipeService.getGroups().subscribe(groups => {
       this.groups = groups;
@@ -37,8 +42,9 @@ export class EditRecipeComponent implements OnInit {
     });
   }
 
-  save(recipe): void {
-    this.recipeService.save(recipe).subscribe(() => {
+  save(values): void {
+    Object.assign(this.recipe, values);
+    this.recipeService.save(this.recipe).subscribe(() => {
       this.dialogRef.close();
     });
   }

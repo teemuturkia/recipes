@@ -28,9 +28,19 @@ export class RecipeListComponent implements OnInit {
     this.dialog.open(EditRecipeComponent);
   }
 
+  edit(recipe: Recipe): void {
+    this.dialog.open(EditRecipeComponent, {
+      data: {recipe}
+    });
+  }
+
   openRecipe(recipe: Recipe): void {
     this.dialog.open(RecipeViewComponent, {
       data: {recipe}
+    }).afterClosed().subscribe(result => {
+      if (result === 'edit') {
+        this.edit(recipe);
+      }
     });
   }
 

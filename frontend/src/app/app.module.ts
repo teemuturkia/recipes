@@ -21,6 +21,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GroupFilterPipe } from './pipes/group-filter.pipe';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RecipeViewComponent } from './recipe-view/recipe-view.component';
     MatListModule,
     MatSidenavModule,
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

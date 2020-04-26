@@ -26,10 +26,28 @@ const getAll = () => {
 
 const create = (recipe) => {
     const newRecipeRef = ref.push();
-    newRecipeRef.set(recipe);
+    const recipeId = newRecipeRef.key;
+    return newRecipeRef.set(recipe).then(() => {
+        recipe.id = recipeId;
+        return recipe;
+    });
+};
+
+const update = (recipe, recipeId) => {
+    delete recipe.id;
+    return ref.child(recipeId).set(recipe).then(() => {
+        recipe.id = recipeId;
+        return recipe;
+    });
+}
+
+const remove = (recipeId) => {
+    return ref.child(recipeId).remove();
 };
 
 module.exports = {
     getAll,
-    create
+    create,
+    update,
+    remove
 };

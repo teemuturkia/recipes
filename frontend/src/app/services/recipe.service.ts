@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Recipe } from '../models/recipe';
 import { environment } from '../../environments/environment';
 import { RecipeList } from '../models/recipe-list';
-import { catchError, map, retry } from 'rxjs/operators';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -26,26 +26,40 @@ export class RecipeService {
   }
 
   save(recipe: Recipe): Observable<any> {
-    // TODO: validation
-    const list = this.recipes.value;
-    list.push(recipe);
-    this.recipes.next(list);
-    // Save to server
-    return this.http.post(this.baseUrl, recipe).pipe(
+    let httpAction: Observable<Recipe>;
+    if (recipe.id) {
+      httpAction = this.http.put<Recipe>(this.baseUrl + '/' + recipe.id, recipe);
+    } else {
+      httpAction = this.http.post<Recipe>(this.baseUrl, recipe);
+    }
+    return httpAction.pipe(
       retry(2),
       catchError(err => {
         this.snackBar.open('Tallennus epäonnistui! Yritä hetken kuluttua uudelleen...');
-        // Remove from list
-        list.pop();
-        this.recipes.next(list);
         throw err;
+      }),
+      tap(saved => {
+        let list = this.recipes.value;
+        list = list.filter(r => r.id !== saved.id);
+        list.push(saved);
+        this.recipes.next(list);
+      })
+    );
+  }
+
+  delete(recipeId: string): Observable<any> {
+    return this.http.delete(this.baseUrl + '/' + recipeId).pipe(
+      tap(() => {
+        let list = this.recipes.value;
+        list = list.filter(r => r.id !== recipeId);
+        this.recipes.next(list);
       })
     );
   }
 
   getGroups(): Observable<string[]> {
     return this.getAll().pipe(
-      map((recipes) => {
+      map(recipes => {
         if (!recipes) {
           return [];
         }
